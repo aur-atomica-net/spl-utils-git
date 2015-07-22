@@ -24,7 +24,7 @@ conflicts=("spl-utils" "spl-utils-lts")
 
 pkgver() {
     cd ${srcdir}/${_gitname}
-    REPO_VER=$(git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g')
+    REPO_VER=$(git describe --long | sed 's/^spl-//;s/\([^-]*-g\)/r\1/;s/-/./g')
     KERNEL_VER=$(pacman -Q linux | awk '{print $2}' | sed -r 's/-/_/g')
     echo "${REPO_VER}_${KERNEL_VER}"
 }
